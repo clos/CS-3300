@@ -9,7 +9,7 @@ public class GPSLocation {
 	private GPSCoordinate longitude, latitude;
 	private Time time;
 	private String nmeaSentence;
-	private String checksum;
+	private char checksum;
 	
 	
 	
@@ -24,7 +24,7 @@ public class GPSLocation {
 		this.longitude.setType(CoordinateType.Longitude);
 		this.time = new Time(0);
 		this.nmeaSentence = null;
-		this.checksum = null;
+		this.checksum = 0;
 	}
 	//TODO Check input for reasonable time, valid coordinates
 	public GPSLocation(GPSCoordinate latitude, GPSCoordinate longitude){
@@ -46,7 +46,7 @@ public class GPSLocation {
 	public Time time(){
 		return this.time;
 	}
-	public String checksum(){
+	public char checksum(){
 		return this.checksum;
 	}
 	public String nmeaSentence(){
@@ -73,7 +73,40 @@ public class GPSLocation {
 		this.nmeaSentence = sentence;
 	}
 	public void setCheckSum(String checksum){
-		this.checksum = checksum;
+		char a = 0;
+		char b = 0;
+		if(checksum.length() == 2){
+			if(checksum.charAt(0) > 65 && checksum.charAt(0) <= 70)
+				a = (char)((int)checksum.charAt(0) - 55);
+			else if(checksum.charAt(0) > 48 && checksum.charAt(0) <= 57)
+				a = (char)((int)checksum.charAt(0) - 48);
+			if(checksum.charAt(1) > 65 && checksum.charAt(1) <= 70)
+				b = (char)((int)checksum.charAt(1) - 55);
+			else if(checksum.charAt(1) > 48 && checksum.charAt(1) <= 57)
+				b = (char)((int)checksum.charAt(1) - 48);
+			a = (char)((int) a << 4);
+			this.checksum = (char)(a + b);
+		}
+			
 	}
 	
+	public char calcChecksum(){
+		int index;
+		char tempChecksum = 0;
+		if(this.checksum != 0){
+			for(index=1;index<this.nmeaSentence.length()-5;index++){
+				tempChecksum = (char)(tempChecksum ^ this.nmeaSentence.charAt(index));	
+			}
+		}
+		return tempChecksum;
+	}
+	public boolean verifyChecksum(){
+		char tempChecksum = this.calcChecksum();
+		if(this.checksum == tempChecksum)
+			return true;	
+		else
+			return false;
+	}
 }
+	
+	

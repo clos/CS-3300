@@ -2,7 +2,6 @@
 
 //TODO Javadoc/commenting, add degrees/minutes/seconds
 public class GPSCoordinate {
-	
 	/*
 	 * Attributes
 	 */

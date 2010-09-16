@@ -14,7 +14,7 @@ public class NMEAParser {
 	private Scanner scan;
 	
 	public NMEAParser(){
-		this.gll = Pattern.compile("\\$(GP|LC|IT|IN|EC|CD|GL|GN)GLL,([0-9]){4}\\.([0-9]){2}(([0-9]){2})?,(N|S),([0-9]){5}\\.([0-9]){2}(([0-9]){2})?,(E|W),(((0|1)[0-9])|2[0-3])[0-5][0-9][0-5][0-9]\\.[0-9][0-9],(A|V),([0-9a-zA-Z],)?\\*[0-9a-fA-F][0-9a-fA-F]\r\n");
+		this.gll = Pattern.compile("\\$(GP|LC|IT|IN|EC|CD|GL|GN)GLL,([0-9]){4}\\.([0-9]){2}([0-9])*,(N|S),([0-9]){5}\\.([0-9]){2}([0-9])*,(E|W),(((0|1)[0-9])|2[0-3])[0-5][0-9][0-5][0-9](\\.[0-9]+)?,(A|V)((,)?|(,[0-9a-zA-Z],)?)\\*[0-9a-fA-F][0-9a-fA-F]\r\n");
 	}
 	
 	public GPSLocation parseSentence(String sentence){
@@ -24,7 +24,7 @@ public class NMEAParser {
 		this.currMatcher = this.gll.matcher(sentence);
 		if(currMatcher.find()){
 			GPSCoordinate latitude,longitude;
-			String faaTemp, checksum;
+			String lookahead, checksum;
 			this.scan = new Scanner(sentence);
 			this.scan.useDelimiter(",");
 			// Skip "$--GLL"
@@ -41,20 +41,21 @@ public class NMEAParser {
 			// Set Longitude Hemisphere
 			longitude.setHemisphere((scan.next().equals("E")) ? 
 					Hemisphere.East : Hemisphere.West);
+			//Create GPSLocation
+			gpsloc = new GPSLocation(latitude, longitude);
 			// Skip Data Validity
 			scan.next();
 			// Skip Time
 			scan.next();
 			// Check if FAA Mode exists, else Set Checksum
-			faaTemp = scan.next();
-			if(faaTemp.contains("*")){
-				checksum = faaTemp;
+			lookahead = scan.next();
+			if(lookahead.contains("*")){
+				checksum = lookahead;
 			}
 			else{
 				checksum = scan.next();
 			}
-			gpsloc = new GPSLocation(latitude, longitude);
-			gpsloc.setCheckSum(checksum); // Store Checksum
+			gpsloc.setCheckSum(checksum.substring(1, 3)); // Store Checksum
 			gpsloc.setSentence(sentence); // Store NMEA Sentence	
 		}
 		return gpsloc;
