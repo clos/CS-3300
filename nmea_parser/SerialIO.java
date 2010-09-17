@@ -1,36 +1,41 @@
 import java.io.*;
-import java.util.Scanner;
-import java.util.regex.Pattern;
+
 
 public class SerialIO {
 
 	private int packetsize;
 	private File file;
-	private String packet;
-	private Scanner sc;
 	private FileInputStream  fis = null;
 
 	public SerialIO(String filename){
+		packetsize = 100;
 		file = new File(filename);
 		try{
 			fis = new FileInputStream(file);
-			sc = new Scanner(fis);
-
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
 		}
 	}
 
-	public String pull() throws IOException{
-		packet = null;
-		if(sc.hasNext()){
-			packet = sc.next(Pattern.compile("(.*){" + packetsize + "}"));
+	public String pull(){
+		String packet = "";
+		try{
+			int tempByte=fis.read();
+			for(int cnt=0; tempByte > 0  && cnt < this.packetsize; cnt++ ){
+				packet = packet.concat(Character.toString(((char)tempByte)));
+				tempByte=fis.read();
+			}
+		}
+		catch(IOException e){
 		}
 		return packet;
 	}
 	
 	public void close() throws IOException{
-		fis.close();
-		sc.close();
+		try{
+			fis.close();
+		}
+		catch(IOException e){
+		}
 	}
 }

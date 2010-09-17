@@ -12,9 +12,11 @@ public class NMEAParser {
 	private Pattern gll;
 	private Matcher currMatcher;
 	private Scanner scan;
+	private String nmeaSentencePattern;
 	
 	public NMEAParser(){
 		this.gll = Pattern.compile("\\$(GP|LC|IT|IN|EC|CD|GL|GN)GLL,([0-9]){4}\\.([0-9]){2}([0-9])*,(N|S),([0-9]){5}\\.([0-9]){2}([0-9])*,(E|W),(((0|1)[0-9])|2[0-3])[0-5][0-9][0-5][0-9](\\.[0-9]+)?,(A|V)((,)?|(,[0-9a-zA-Z],)?)\\*[0-9a-fA-F][0-9a-fA-F]\r\n");
+		this.nmeaSentencePattern = "\\$[^\\$\\r\\n]*\\r\\n";
 	}
 	
 	public GPSLocation parseSentence(String sentence){
@@ -55,10 +57,15 @@ public class NMEAParser {
 			else{
 				checksum = scan.next();
 			}
+			gpsloc.setSentence(sentence);
 			gpsloc.setCheckSum(checksum.substring(1, 3)); // Store Checksum
 			gpsloc.setSentence(sentence); // Store NMEA Sentence	
 		}
+		if(scan != null)scan.close();
 		return gpsloc;
+	}
+	public String getNMEASentencePattern(){
+		return this.nmeaSentencePattern;
 	}
 }
 
