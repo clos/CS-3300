@@ -1,0 +1,15 @@
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+~            CS3300 Cone of Silence
+~                Release Plan 
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Updated: 09/21/10
+
+09/16: GPS I
+09/30: Specification, Design Docs
+10/14: Secure Auth. I, CoS Integration I
+10/28: Secure Auth. II, CoS Integration II
+11/11: GPS II, Database I
+11/25: Database II, Packaging
+
+
