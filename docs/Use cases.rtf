@@ -1,0 +1,101 @@
+{\rtf1\ansi\ansicpg1252\cocoartf1038\cocoasubrtf320
+{\fonttbl\f0\froman\fcharset0 Times-Roman;\f1\fnil\fcharset0 LucidaGrande;}
+{\colortbl;\red255\green255\blue255;}
+\margl1440\margr1440\vieww13000\viewh14140\viewkind0
+\deftab720
+\pard\pardeftab720\sa280\ql\qnatural
+
+\f0\b\fs28 \cf0 \
+Use Case 1\
+Description\
+\pard\pardeftab720\sa240\ql\qnatural
+
+\b0\fs24 \cf0 This use case describes how a user connects to the citrix server while using our gps validation software\
+
+\b\fs28 Actors\
+\pard\pardeftab720\sa300\ql\qnatural
+
+\fs24 \cf0  1) Travelling Professor\
+ 2) Citrix server\
+\pard\pardeftab720\sa280\ql\qnatural
+
+\fs28 \cf0  Preconditions\
+\pard\pardeftab720\sa240\ql\qnatural
+
+\b0\fs24 \cf0 The professors computer is outfitted with a working GPS module.
+\f1 \uc0\u8232 \u8232 
+\f0 The professor's computer is able to connect to the internet.\
+\pard\pardeftab720\sa280\ql\qnatural
+
+\b\fs28 \cf0  Basic Flow of Events\
+\pard\pardeftab720\sa240\ql\qnatural
+
+\b0\fs24 \cf0 1. Professor tries to use Citrix.\
+2. The system prompts the professor to log in\
+3. login credentials are verified\
+4. The GPS module checks the professor's current location\
+5. This GPS co-ordinate data is checked against a remote database of valid geolocations\
+6. The system verifies that the co-ordinate is acceptable.\
+7. The user is logged into the system\
+\
+\pard\pardeftab720\sa280\ql\qnatural
+
+\b\fs28 \cf0  Alternative Flows
+\b0 \
+1) Invalid login\
+	If in step 2 the user enters invalid/wrong information, display the error message "Invalid login" and exit\
+2) No GPS connectivity\
+	If the GPS module cannot be accessed to provide data in step 4, display message "check GPS module" and exit\
+3) Garbled/incorrect GPS data\
+	If the GPS module is malfunctioning in step 4, display message "check GPS module" and exit\
+4) Invalid login location\
+	If in step 5, the current GPS co-ordinates do not match with a valid location, display message "Please move to a secure / approved location before logging in" and exit\
+5) Connection to Citrix servers fails\
+	If in step 3, Citrix cannot be reached on the network, display "CITRIX server unreachable" and exit\
+6) Connection to remote gps database fails\
+	If in step 5, the database cannot be reached on the network, display "GPS server unreachable" and exit\
+\
+
+\b Use Case 2
+\b0 \
+\
+
+\b Description\
+\pard\pardeftab720\sa240\ql\qnatural
+
+\b0\fs24 \cf0 This use case describes how a user's movement, once logged in, affects his interactions with the system.\
+
+\b\fs28 Actors\
+\pard\pardeftab720\sa300\ql\qnatural
+
+\fs24 \cf0  1) Travelling Professor\
+ 2) Citrix server\
+\pard\pardeftab720\sa280\ql\qnatural
+
+\fs28 \cf0  Preconditions\
+\pard\pardeftab720\sa240\ql\qnatural
+
+\b0\fs24 \cf0 The professors computer is outfitted with a working GPS module.
+\f1 \uc0\u8232 \u8232 
+\f0 The professor's computer is able to connect to the internet.\
+The professor is logged into citrix using our system\
+\pard\pardeftab720\sa280\ql\qnatural
+
+\b\fs28 \cf0  Basic Flow of Events\
+\pard\pardeftab720\sa240\ql\qnatural
+
+\b0\fs24 \cf0 1. Professor moves.\
+2. The GPS module checks the professor's current location\
+3. This GPS co-ordinate data is checked against a remote database of valid geolocations\
+4. The system verifies that the co-ordinate is acceptable.\
+5. The user remains logged into the system\
+\
+\pard\pardeftab720\sa280\ql\qnatural
+
+\b\fs28 \cf0  Alternative Flows
+\b0 \
+1) User moves to insecure location\
+	If in step 1, the user moves outside of his "safe" bounds, this is detected in step 3, and in step 4, the user is booted out of the system. A message is also displayed saying "please remain in a secure location."\
+\
+2) GPS module loses connection\
+	If during normal use, the gps module becomes unreachable, they lose connectivity, and a message is displayed stating that the user must reconnect the module before continuing.}

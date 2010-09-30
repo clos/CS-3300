@@ -1,0 +1,10 @@
+VPN Guy Questions
+
+1. How does the authentication work?
+2. Is there any part of the process (i.e. a script) that would easily allow us to interrupt access or prevent authenticaiton? 
+3. Where's the VPN server? Is it just a peace of software or hardware
+4. What is its life cycle? How often is it updated?
+5. How many users does/can the VPN have at any given time?
+6. Is there any way to identify if the VPN is distributed by OIT?
+7. How does authentication work in general (LDAP, AD, etc.)?
+8. Is there any non-client documentation?
