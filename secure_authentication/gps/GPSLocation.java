@@ -9,8 +9,10 @@ public class GPSLocation {
 	/*
 	 * Attributes
 	 */
-	private GPSCoordinate longitude, latitude;
+	private gps.GPSCoordinate longitude, latitude;
+	//timestamp 
 	private Time time;
+	//Coordinate
 	private String nmeaSentence;
 	private char checksum;
 	private boolean valid;
@@ -32,7 +34,7 @@ public class GPSLocation {
 		this.valid = false;
 	}
 	//TODO Check input for reasonable time, valid coordinates
-	public GPSLocation(GPSCoordinate latitude, GPSCoordinate longitude){
+	public GPSLocation(gps.GPSCoordinate latitude, gps.GPSCoordinate longitude){
 		this();
 		this.latitude = latitude;
 		this.longitude = longitude;
@@ -119,6 +121,28 @@ public class GPSLocation {
 			return false;
 		}
 			
+	}
+	
+	public String toString(){
+		String val="";
+		val+="Latitude = ";
+		if(this.latitude().hemisphere == gps.Hemisphere.East){
+			val+="East ";
+		}
+		if(this.latitude().hemisphere == gps.Hemisphere.West){
+			val+="West ";
+		}
+		val+= this.latitude.degrees()+ " ";
+
+		val+="Longitude = ";
+		if(this.longitude().hemisphere == gps.Hemisphere.North){
+			val+="North ";
+		}
+		if(this.longitude().hemisphere == gps.Hemisphere.South){
+			val+="South ";
+		}		
+		val+= this.longitude.degrees();
+		return val;
 	}
 }
 	

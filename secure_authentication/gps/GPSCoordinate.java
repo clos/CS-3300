@@ -7,8 +7,8 @@ public class GPSCoordinate {
 	/*
 	 * Attributes
 	 */
-	private CoordinateType type;
-	private Hemisphere hemisphere;
+	public CoordinateType type;
+	public Hemisphere hemisphere;
 	//private int degrees, minutes, seconds;
 	private double value;
 	
