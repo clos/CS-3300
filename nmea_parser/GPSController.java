@@ -1,3 +1,5 @@
+package nmea_parser;
+
 import java.util.regex.Pattern;
 
 
@@ -13,15 +15,15 @@ public class GPSController{
 	public GPSController(){
 		this.parser = new NMEAParser();
 		this.io = new SerialIO("test_nmea_sentences2.txt");
-		this.nmeaSentencePattern = Pattern.compile(this.parser.getNMEASentencePattern());
+//		this.nmeaSentencePattern = Pattern.compile(this.parser.getNMEASentencePattern());
 		this.pollCount = 1000;
 		this.buffer = "";
 	}
 
-	public GPSLocation grabGPS(){
+	public gps.GPSLocation grabGPS(){
 		String sentence = "";
 		String tempStr;
-		GPSLocation gps = null;
+		gps.GPSLocation gps = null;
 		int count = 0;
 		while((gps == null) && count < this.pollCount){
 			buffer = buffer.concat(this.io.pull());
@@ -37,7 +39,7 @@ public class GPSController{
 					index2 = buffer.substring(index1).indexOf('\n') + index1;
 				}
 				sentence = buffer.substring(index1, index2 + 1);
-				gps = this.parser.parseSentence(sentence);
+	//			gps = this.parser.parseSentence(sentence);
 				if(index2+1 < buffer.length()) buffer = buffer.substring(index2+1);
 			}
 		}

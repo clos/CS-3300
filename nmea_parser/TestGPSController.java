@@ -1,3 +1,5 @@
+package nmea_parser;
+
 
 public class TestGPSController {
 	public static void main(String[] args){
@@ -5,7 +7,7 @@ public class TestGPSController {
 		System.out.println("GPS Info");
 		System.out.println("---------");
 		for(int cnt=0;cnt<20;cnt++){
-			GPSLocation gps = controller.grabGPS();
+			gps.GPSLocation gps = controller.grabGPS();
 		
 			if(gps == null)
 				break;;
