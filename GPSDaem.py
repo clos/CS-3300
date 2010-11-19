@@ -29,5 +29,6 @@ pfactory = TBinaryProtocol.TBinaryProtocolFactory()
 server = TServer.TSimpleServer(processor, transport, tfactory, pfactory)
 
 print 'Start the server!'
+print 'Up and ready sir!'
 server.serve()
 print 'Up and ready sir!'
