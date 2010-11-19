@@ -17,7 +17,7 @@ class GPSHandler:
   def __init__(self):
     self.log = {}
 
-  def string getCommString(self):
+  def getCommString(self):
     return COMM.readGPS()
 
 handler = GPSHandler()
